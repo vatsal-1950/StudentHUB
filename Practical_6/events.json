@@ -1,0 +1,107 @@
+[
+    {
+        "id": 1,
+        "title": "Web Development Workshop",
+        "date": "2026-08-10",
+        "venue": "Seminar Hall",
+        "category": "Workshop"
+    },
+    {
+        "id": 2,
+        "title": "Hackathon",
+        "date": "2026-08-13",
+        "venue": "Computer Lab",
+        "category": "Competition"
+    },
+    {
+        "id": 3,
+        "title": "Sports Day",
+        "date": "2026-08-16",
+        "venue": "College Ground",
+        "category": "Sports"
+    },
+    {
+        "id": 4,
+        "title": "Coding Contest",
+        "date": "2026-08-19",
+        "venue": "Seminar Hall",
+        "category": "Competition"
+    },
+    {
+        "id": 5,
+        "title": "AI Seminar",
+        "date": "2026-08-22",
+        "venue": "Computer Lab",
+        "category": "Seminar"
+    },
+    {
+        "id": 6,
+        "title": "Web Development Workshop",
+        "date": "2026-09-10",
+        "venue": "College Ground",
+        "category": "Workshop"
+    },
+    {
+        "id": 7,
+        "title": "Hackathon",
+        "date": "2026-09-13",
+        "venue": "Seminar Hall",
+        "category": "Competition"
+    },
+    {
+        "id": 8,
+        "title": "Sports Day",
+        "date": "2026-09-16",
+        "venue": "Computer Lab",
+        "category": "Sports"
+    },
+    {
+        "id": 9,
+        "title": "Coding Contest",
+        "date": "2026-09-19",
+        "venue": "College Ground",
+        "category": "Competition"
+    },
+    {
+        "id": 10,
+        "title": "AI Seminar",
+        "date": "2026-09-22",
+        "venue": "Seminar Hall",
+        "category": "Seminar"
+    },
+    {
+        "id": 11,
+        "title": "Web Development Workshop",
+        "date": "2026-10-10",
+        "venue": "Computer Lab",
+        "category": "Workshop"
+    },
+    {
+        "id": 12,
+        "title": "Hackathon",
+        "date": "2026-10-13",
+        "venue": "College Ground",
+        "category": "Competition"
+    },
+    {
+        "id": 13,
+        "title": "Sports Day",
+        "date": "2026-10-16",
+        "venue": "Seminar Hall",
+        "category": "Sports"
+    },
+    {
+        "id": 14,
+        "title": "Coding Contest",
+        "date": "2026-10-19",
+        "venue": "Computer Lab",
+        "category": "Competition"
+    },
+    {
+        "id": 15,
+        "title": "AI Seminar",
+        "date": "2026-10-22",
+        "venue": "College Ground",
+        "category": "Seminar"
+    }
+]

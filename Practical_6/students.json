@@ -1,0 +1,92 @@
+[
+    {
+        "id": 1,
+        "name": "Student 1",
+        "course": "IT",
+        "year": "Second Year"
+    },
+    {
+        "id": 2,
+        "name": "Student 2",
+        "course": "Mechanical Engineering",
+        "year": "Third Year"
+    },
+    {
+        "id": 3,
+        "name": "Student 3",
+        "course": "Computer Engineering",
+        "year": "First Year"
+    },
+    {
+        "id": 4,
+        "name": "Student 4",
+        "course": "IT",
+        "year": "Second Year"
+    },
+    {
+        "id": 5,
+        "name": "Student 5",
+        "course": "Mechanical Engineering",
+        "year": "Third Year"
+    },
+    {
+        "id": 6,
+        "name": "Student 6",
+        "course": "Computer Engineering",
+        "year": "First Year"
+    },
+    {
+        "id": 7,
+        "name": "Student 7",
+        "course": "IT",
+        "year": "Second Year"
+    },
+    {
+        "id": 8,
+        "name": "Student 8",
+        "course": "Mechanical Engineering",
+        "year": "Third Year"
+    },
+    {
+        "id": 9,
+        "name": "Student 9",
+        "course": "Computer Engineering",
+        "year": "First Year"
+    },
+    {
+        "id": 10,
+        "name": "Student 10",
+        "course": "IT",
+        "year": "Second Year"
+    },
+    {
+        "id": 11,
+        "name": "Student 11",
+        "course": "Mechanical Engineering",
+        "year": "Third Year"
+    },
+    {
+        "id": 12,
+        "name": "Student 12",
+        "course": "Computer Engineering",
+        "year": "First Year"
+    },
+    {
+        "id": 13,
+        "name": "Student 13",
+        "course": "IT",
+        "year": "Second Year"
+    },
+    {
+        "id": 14,
+        "name": "Student 14",
+        "course": "Mechanical Engineering",
+        "year": "Third Year"
+    },
+    {
+        "id": 15,
+        "name": "Student 15",
+        "course": "Computer Engineering",
+        "year": "First Year"
+    }
+]

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<title>StudentHub | Events</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+<h1>StudentHub Portal</h1>
+<button id="hamburgerBtn" class="hamburger-btn" aria-label="toggle menu">☰ Menu</button>
+
+<nav class="ttt">
+
+
+
+<a href="home.html" class="m">Home</a>|
+
+<a href="about.html" class="m1">About</a>|
+
+<a href="register.html" class="m2">Register</a>|
+<a href="login.html" class="m9">Login</a>|
+
+<a href="dashboard.html" class="m3">Dashboard</a>|
+
+<a href="events.html" class="m4">Events</a>|
+
+<a href="profile.html" class="m5">Profile</a>|
+
+<a href="contact.html" class="m6">Contact</a>|
+
+<a href="faq.html" class="m7">FAQ</a>|
+
+<a href="feedback.html" class="m8">Feedback</a>|
+
+
+
+</nav>
+
+<button id="themeButton" class="theme-btn">Light / Dark</button>
+</header>
+
+<main>
+
+<section>
+
+<h2 align="center">Upcoming Events</h2>
+
+<div class="json-controls">
+    <input type="text" id="searchInput" placeholder="Search events...">
+    <select id="categoryFilter">
+        <option value="all">All Categories</option>
+        <option value="Workshop">Workshop</option>
+        <option value="Competition">Competition</option>
+        <option value="Sports">Sports</option>
+        <option value="Seminar">Seminar</option>
+    </select>
+    <select id="sortSelect">
+        <option value="dateAsc">Date: Oldest First</option>
+        <option value="dateDesc">Date: Newest First</option>
+        <option value="titleAsc">Title: A-Z</option>
+        <option value="titleDesc">Title: Z-A</option>
+    </select>
+</div>
+
+<p id="loadingMessage">Loading events...</p>
+<p id="errorMessage" class="json-error"></p>
+<div id="eventContainer" class="event-list"></div>
+<div id="pagination" class="pagination"></div>
+
+</section>
+
+</main>
+
+<footer>
+<p>© 2026 StudentHub Portal</p>
+</footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

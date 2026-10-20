@@ -1,0 +1,1 @@
+<?php\nrequire "register.php";\n?>

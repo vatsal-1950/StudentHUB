@@ -1,59 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>StudentHub | FAQ</title>
-<link rel="stylesheet" href="style.css">
+    <title>StudentHub | FAQ</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
 <header>
-
-<h1><span class="title-badge">StudentHub Portal</span></h1>
-
-<nav class="ttt">
-<a href="home.html" class="m">Home</a>
-<a href="about.html" class="m1">About</a>
-<a href="register.php" class="m2">Register</a>
-<a href="login.php" class="m9">Login</a>
-<a href="users.php" class="m3">Users List</a>
-<a href="dashboard.html" class="m4">Dashboard</a>
-<a href="events.html" class="m5">Events</a>
-<a href="profile.html" class="m6">Profile</a>
-<a href="contact.html" class="m7">Contact</a>
-<a href="faq.html" class="m8">FAQ</a>
-</nav>
-
+    <h1>StudentHub Portal</h1>
+    <button id="hamburgerBtn" class="hamburger-btn" aria-label="toggle menu">☰ Menu</button>
+    <nav class="ttt">
+        <a href="home.html" class="m">Home</a>|
+        <a href="about.html" class="m1">About</a>|
+        <a href="register.php" class="m2">Register</a>|
+        <a href="login.html" class="m9">Login</a>|
+        <a href="dashboard.html" class="m3">Dashboard</a>|
+        <a href="events.html" class="m4">Events</a>|
+        <a href="profile.html" class="m5">Profile</a>|
+        <a href="contact.html" class="m6">Contact</a>|
+        <a href="faq.html" class="m7">FAQ</a>|
+        <a href="feedback.html" class="m8">Feedback</a>|
+        <a href="view_users.php" class="m10">Users</a>
+    </nav>
+    <button id="themeButton" class="theme-btn">Light / Dark</button>
 </header>
 
 <main>
+<section>
+    <h2 align="center">Frequently Asked Questions</h2>
+    <br>
 
-<div class="page-box">
+    <div class="faq-item">
+        <h3 class="faq-question">+ How does Practical 7 handle registration?</h3>
+        <p class="faq-answer">Registration is processed by PHP on the server side with validation, sanitization, and storage in CSV and JSON formats.</p>
+    </div>
 
-<h2><span class="title-badge">Frequently Asked Questions</span></h2>
-<p class="data-intro">Find answers to common questions. Search the questions and answers or choose a topic.</p>
-<div class="data-controls" data-controls>
-  <label>Search FAQs<input type="search" data-search placeholder="Search questions and answers"></label>
-  <label>Topic<select data-filter><option value="">All topics</option></select></label>
-  <label>Sort by<select data-sort><option value="question-asc">Question (A–Z)</option><option value="question-desc">Question (Z–A)</option><option value="category-asc">Topic (A–Z)</option></select></label>
-</div>
-<p class="data-status" data-status role="status" aria-live="polite">Loading FAQs…</p>
-<div class="data-grid" data-results></div>
-<nav class="pagination" data-pagination aria-label="FAQ pages"></nav>
+    <div class="faq-item">
+        <h3 class="faq-question">+ Where can I see stored records?</h3>
+        <p class="faq-answer">Click on the Records menu item or visit view_users.php to inspect all records from CSV and JSON storage.</p>
+    </div>
 
-</div>
+    <div class="faq-item">
+        <h3 class="faq-question">+ How do I send a contact message?</h3>
+        <p class="faq-answer">Go to the Contact page, fill in your name, email and message, and submit via POST to contact.html.</p>
+    </div>
 
+    <div class="faq-item">
+        <h3 class="faq-question">+ Can I run this without XAMPP?</h3>
+        <p class="faq-answer">PHP processing requires a PHP server such as XAMPP Apache or the built-in PHP development server.</p>
+    </div>
+</section>
 </main>
 
 <footer>
-
-<p>© 2026 StudentHub Portal</p>
-
+    <p>© 2026 StudentHub Portal</p>
 </footer>
 
 <script src="script.js"></script>
-<script type="module" src="data-browser.js"></script>
 </body>
 </html>

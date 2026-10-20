@@ -1,203 +1,210 @@
-(function () {
-const form = document.getElementById("registrationForm");
+const banner = document.getElementById("notificationBanner");
+const closeBanner = document.getElementById("closeBanner");
 
-if (form) {
-form.addEventListener("submit", function (event) {
+if (closeBanner) {
+    closeBanner.addEventListener("click", function () {
+        banner.style.display = "none";
+    });
+}
 
-    event.preventDefault();
+const hamburger = document.getElementById("hamburgerBtn");
+const nav = document.querySelector(".ttt");
 
-    const name = document.getElementById("name").value.trim();
-    const email = document.getElementById("email").value.trim();
-    const mobile = document.getElementById("mobile").value.trim();
-    const password = document.getElementById("password").value;
-    const confirmPassword = document.getElementById("confirmPassword").value;
-    const course = document.getElementById("course").value;
-    const year = document.getElementById("year").value;
+if (hamburger) {
+    hamburger.addEventListener("click", function () {
+        nav.classList.toggle("show-menu");
+    });
+}
 
-    const gender = document.querySelector(
-        'input[name="gender"]:checked'
-    );
+const themeButton = document.getElementById("themeButton");
+const savedTheme = localStorage.getItem("theme");
 
-    const terms = document.getElementById("terms").checked;
+if (savedTheme === "dark") {
+    document.body.classList.add("dark-mode");
+}
 
-    const nameError = document.getElementById("nameError");
-    const emailError = document.getElementById("emailError");
-    const mobileError = document.getElementById("mobileError");
-    const passwordError = document.getElementById("passwordError");
-    const confirmPasswordError =
-        document.getElementById("confirmPasswordError");
-    const courseError = document.getElementById("courseError");
-    const yearError = document.getElementById("yearError");
-    const genderError = document.getElementById("genderError");
-    const termsError = document.getElementById("termsError");
+if (themeButton) {
+    themeButton.addEventListener("click", function () {
+        document.body.classList.toggle("dark-mode");
 
-    nameError.textContent = "";
-    emailError.textContent = "";
-    mobileError.textContent = "";
-    passwordError.textContent = "";
-    confirmPasswordError.textContent = "";
-    courseError.textContent = "";
-    yearError.textContent = "";
-    genderError.textContent = "";
-    termsError.textContent = "";
+        if (document.body.classList.contains("dark-mode")) {
+            localStorage.setItem("theme", "dark");
+        } else {
+            localStorage.setItem("theme", "light");
+        }
+    });
+}
 
-    let valid = true;
+const faqQuestions = document.querySelectorAll(".faq-question");
 
-    const namePattern = /^[A-Za-z ]{2,50}$/;
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    const mobilePattern = /^[6-9][0-9]{9}$/;
+faqQuestions.forEach(function (question) {
+    question.addEventListener("click", function () {
+        const answer = question.nextElementSibling;
+        answer.classList.toggle("show-answer");
 
-    if (name === "") {
-        nameError.textContent = "Name is required.";
-        valid = false;
+        if (answer.classList.contains("show-answer")) {
+            question.textContent = "- " + question.textContent.substring(2);
+        } else {
+            question.textContent = "+ " + question.textContent.substring(2);
+        }
+    });
+});
+
+const slides = document.querySelectorAll(".slide");
+const previousButton = document.getElementById("previousButton");
+const nextButton = document.getElementById("nextButton");
+let slideNumber = 0;
+
+function showSlide(number) {
+    slides.forEach(function (slide) {
+        slide.style.display = "none";
+    });
+
+    if (slides.length > 0) {
+        slides[number].style.display = "block";
     }
-    else if (!namePattern.test(name)) {
-        nameError.textContent =
-            "Enter a valid name using only letters and spaces.";
-        valid = false;
+}
+
+if (slides.length > 0) {
+    showSlide(slideNumber);
+}
+
+if (nextButton) {
+    nextButton.addEventListener("click", function () {
+        slideNumber++;
+
+        if (slideNumber >= slides.length) {
+            slideNumber = 0;
+        }
+
+        showSlide(slideNumber);
+    });
+}
+
+if (previousButton) {
+    previousButton.addEventListener("click", function () {
+        slideNumber--;
+
+        if (slideNumber < 0) {
+            slideNumber = slides.length - 1;
+        }
+
+        showSlide(slideNumber);
+    });
+}
+
+const modal = document.getElementById("noticeModal");
+const openModal = document.getElementById("openModal");
+const closeModal = document.getElementById("closeModal");
+
+if (openModal) {
+    openModal.addEventListener("click", function () {
+        modal.style.display = "block";
+    });
+}
+
+if (closeModal) {
+    closeModal.addEventListener("click", function () {
+        modal.style.display = "none";
+    });
+}
+
+window.addEventListener("click", function (event) {
+    if (event.target === modal) {
+        modal.style.display = "none";
+    }
+});
+
+let allEvents = [];
+let filteredEvents = [];
+let currentPage = 1;
+const recordsPerPage = 5;
+
+const eventContainer = document.getElementById("eventContainer");
+const searchInput = document.getElementById("searchInput");
+const categoryFilter = document.getElementById("categoryFilter");
+const sortSelect = document.getElementById("sortSelect");
+const loadingMessage = document.getElementById("loadingMessage");
+const errorMessage = document.getElementById("errorMessage");
+const pagination = document.getElementById("pagination");
+
+if (eventContainer) {
+    fetch("events.json")
+        .then(function (response) {
+            if (!response.ok) throw new Error("Unable to load events.json");
+            return response.json();
+        })
+        .then(function (data) {
+            allEvents = data;
+            loadingMessage.style.display = "none";
+            applyFilters();
+        })
+        .catch(function (error) {
+            loadingMessage.style.display = "none";
+            errorMessage.textContent = "Error loading event data: " + error.message;
+        });
+
+    function applyFilters() {
+        const searchText = searchInput.value.toLowerCase().trim();
+        const category = categoryFilter.value;
+
+        filteredEvents = allEvents.filter(function (event) {
+            const matchesSearch = event.title.toLowerCase().includes(searchText) ||
+                event.venue.toLowerCase().includes(searchText);
+            const matchesCategory = category === "all" || event.category === category;
+            return matchesSearch && matchesCategory;
+        });
+
+        const sortValue = sortSelect.value;
+        filteredEvents.sort(function (a, b) {
+            if (sortValue === "dateAsc") return a.date.localeCompare(b.date);
+            if (sortValue === "dateDesc") return b.date.localeCompare(a.date);
+            if (sortValue === "titleAsc") return a.title.localeCompare(b.title);
+            return b.title.localeCompare(a.title);
+        });
+
+        currentPage = 1;
+        renderEvents();
+        renderPagination();
     }
 
-    if (email === "") {
-        emailError.textContent = "Email is required.";
-        valid = false;
-    }
-    else if (!emailPattern.test(email)) {
-        emailError.textContent = "Enter a valid email address.";
-        valid = false;
+    function renderEvents() {
+        eventContainer.innerHTML = "";
+        const start = (currentPage - 1) * recordsPerPage;
+        const pageItems = filteredEvents.slice(start, start + recordsPerPage);
+
+        if (pageItems.length === 0) {
+            eventContainer.innerHTML = "<p>No events found.</p>";
+            return;
+        }
+
+        pageItems.forEach(function (event) {
+            const card = document.createElement("article");
+            card.className = "card event-card";
+            card.innerHTML = `<h3>${event.title}</h3>
+                <p><strong>Date:</strong> ${event.date}</p>
+                <p><strong>Venue:</strong> ${event.venue}</p>
+                <p><strong>Category:</strong> ${event.category}</p>`;
+            eventContainer.appendChild(card);
+        });
     }
 
-    if (mobile === "") {
-        mobileError.textContent = "Mobile number is required.";
-        valid = false;
-    }
-    else if (!mobilePattern.test(mobile)) {
-        mobileError.textContent =
-            "Enter a valid 10-digit Indian mobile number.";
-        valid = false;
-    }
-
-    if (password === "") {
-        passwordError.textContent = "Password is required.";
-        valid = false;
-    }
-    else if (password.length < 8) {
-        passwordError.textContent =
-            "Password must contain at least 8 characters.";
-        valid = false;
-    }
-    else if (!/[A-Z]/.test(password)) {
-        passwordError.textContent =
-            "Password must contain at least one uppercase letter.";
-        valid = false;
-    }
-    else if (!/[a-z]/.test(password)) {
-        passwordError.textContent =
-            "Password must contain at least one lowercase letter.";
-        valid = false;
-    }
-    else if (!/[0-9]/.test(password)) {
-        passwordError.textContent =
-            "Password must contain at least one number.";
-        valid = false;
-    }
-    else if (!/[!@#$%^&*]/.test(password)) {
-        passwordError.textContent =
-            "Password must contain at least one special character.";
-        valid = false;
-    }
-
-    if (confirmPassword === "") {
-        confirmPasswordError.textContent =
-            "Please confirm your password.";
-        valid = false;
-    }
-    else if (password !== confirmPassword) {
-        confirmPasswordError.textContent =
-            "Passwords do not match.";
-        valid = false;
-    }
-
-    if (course === "") {
-        courseError.textContent = "Please select a course.";
-        valid = false;
-    }
-
-    if (year === "") {
-        yearError.textContent = "Please select your year.";
-        valid = false;
-    }
-
-    if (!gender) {
-        genderError.textContent = "Please select your gender.";
-        valid = false;
-    }
-
-    if (!terms) {
-        termsError.textContent =
-            "You must accept the terms and conditions.";
-        valid = false;
-    }
-
-    if (valid) {
-        alert("Registration successful!");
-        form.reset();
-
-        const strength = document.getElementById("passwordStrength");
-        if (strength) {
-            strength.textContent = "";
+    function renderPagination() {
+        pagination.innerHTML = "";
+        const totalPages = Math.ceil(filteredEvents.length / recordsPerPage);
+        for (let i = 1; i <= totalPages; i++) {
+            const button = document.createElement("button");
+            button.textContent = i;
+            button.addEventListener("click", function () {
+                currentPage = i;
+                renderEvents();
+                renderPagination();
+            });
+            pagination.appendChild(button);
         }
     }
-});
 
-
-const passwordInput = document.getElementById("password");
-const passwordStrength =
-    document.getElementById("passwordStrength");
-
-passwordInput.addEventListener("input", function () {
-
-    const password = passwordInput.value;
-
-    if (password.length === 0) {
-        passwordStrength.textContent = "";
-        return;
-    }
-
-    let score = 0;
-
-    if (password.length >= 8)
-        score++;
-
-    if (/[A-Z]/.test(password))
-        score++;
-
-    if (/[a-z]/.test(password))
-        score++;
-
-    if (/[0-9]/.test(password))
-        score++;
-
-    if (/[!@#$%^&*]/.test(password))
-        score++;
-
-    if (score <= 2) {
-        passwordStrength.textContent = "Weak password";
-    }
-    else if (score <= 4) {
-        passwordStrength.textContent = "Medium password";
-    }
-    else {
-        passwordStrength.textContent = "Strong password";
-    }
-});
-
-
-passwordInput.addEventListener("keyup", function () {
-
-    if (passwordInput.value.length < 8) {
-        passwordStrength.textContent =
-            "Password should contain at least 8 characters.";
-    }
-});
+    searchInput.addEventListener("input", applyFilters);
+    categoryFilter.addEventListener("change", applyFilters);
+    sortSelect.addEventListener("change", applyFilters);
 }
-})();

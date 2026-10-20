@@ -1,17 +1,77 @@
 [
-  {"id":1,"category":"Registration","question":"How do I register for StudentHub?","answer":"Open the Register page, complete the form, and submit your details."},
-  {"id":2,"category":"Registration","question":"Which details are needed for registration?","answer":"Provide your name, email, mobile number, course, year, and password."},
-  {"id":3,"category":"Account","question":"How do I log in to my account?","answer":"Use the Login page with the email address and password you registered."},
-  {"id":4,"category":"Account","question":"What should I do if I forget my password?","answer":"Contact the StudentHub administrator to request help recovering access."},
-  {"id":5,"category":"Profile","question":"Can I update my student profile?","answer":"Yes. Sign in and update your profile details from the profile section."},
-  {"id":6,"category":"Events","question":"Where can I find upcoming campus events?","answer":"Open the Events page to browse and filter the current event list."},
-  {"id":7,"category":"Events","question":"How do I search for a specific event?","answer":"Enter a title, venue, or keyword in the event search box."},
-  {"id":8,"category":"Events","question":"Are event dates displayed in local time?","answer":"Dates are shown as campus calendar dates in the event listing."},
-  {"id":9,"category":"Academics","question":"How do I find information about my course?","answer":"Course information is available from your student profile or the academic office."},
-  {"id":10,"category":"Notices","question":"Where are important college notices published?","answer":"Check the portal dashboard and the official college notice board regularly."},
-  {"id":11,"category":"Feedback","question":"How can I submit feedback?","answer":"Open the Feedback page, fill in the form, and submit your comments."},
-  {"id":12,"category":"Contact","question":"How can I contact the administration?","answer":"Use the Contact page for the administration office contact information."},
-  {"id":13,"category":"Technical Support","question":"The page is not loading data. What can I try?","answer":"Run the project using a local web server and reload the page; fetch does not work reliably from file URLs."},
-  {"id":14,"category":"Privacy","question":"Who can see my student details?","answer":"This demonstration directory uses sample records and is not connected to a student database."},
-  {"id":15,"category":"Account","question":"How do I sign out?","answer":"Use the sign-out option in the dashboard when it is available in your account."}
+    {
+        "id": 1,
+        "question": "StudentHub FAQ Question 1",
+        "answer": "This is the answer for StudentHub FAQ question 1."
+    },
+    {
+        "id": 2,
+        "question": "StudentHub FAQ Question 2",
+        "answer": "This is the answer for StudentHub FAQ question 2."
+    },
+    {
+        "id": 3,
+        "question": "StudentHub FAQ Question 3",
+        "answer": "This is the answer for StudentHub FAQ question 3."
+    },
+    {
+        "id": 4,
+        "question": "StudentHub FAQ Question 4",
+        "answer": "This is the answer for StudentHub FAQ question 4."
+    },
+    {
+        "id": 5,
+        "question": "StudentHub FAQ Question 5",
+        "answer": "This is the answer for StudentHub FAQ question 5."
+    },
+    {
+        "id": 6,
+        "question": "StudentHub FAQ Question 6",
+        "answer": "This is the answer for StudentHub FAQ question 6."
+    },
+    {
+        "id": 7,
+        "question": "StudentHub FAQ Question 7",
+        "answer": "This is the answer for StudentHub FAQ question 7."
+    },
+    {
+        "id": 8,
+        "question": "StudentHub FAQ Question 8",
+        "answer": "This is the answer for StudentHub FAQ question 8."
+    },
+    {
+        "id": 9,
+        "question": "StudentHub FAQ Question 9",
+        "answer": "This is the answer for StudentHub FAQ question 9."
+    },
+    {
+        "id": 10,
+        "question": "StudentHub FAQ Question 10",
+        "answer": "This is the answer for StudentHub FAQ question 10."
+    },
+    {
+        "id": 11,
+        "question": "StudentHub FAQ Question 11",
+        "answer": "This is the answer for StudentHub FAQ question 11."
+    },
+    {
+        "id": 12,
+        "question": "StudentHub FAQ Question 12",
+        "answer": "This is the answer for StudentHub FAQ question 12."
+    },
+    {
+        "id": 13,
+        "question": "StudentHub FAQ Question 13",
+        "answer": "This is the answer for StudentHub FAQ question 13."
+    },
+    {
+        "id": 14,
+        "question": "StudentHub FAQ Question 14",
+        "answer": "This is the answer for StudentHub FAQ question 14."
+    },
+    {
+        "id": 15,
+        "question": "StudentHub FAQ Question 15",
+        "answer": "This is the answer for StudentHub FAQ question 15."
+    }
 ]

@@ -3,145 +3,252 @@ require_once "db.php";
 
 $name = "";
 $email = "";
-$role = "student";
+$mobile = "";
+$course = "";
+$year = "";
+$gender = "";
+$password = "";
+$confirm = "";
+$terms = "";
+
 $errors = [];
-$success = "";
+$successMessage = "";
+$errorMessage = "";
 
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $name = trim($_POST["name"] ?? "");
-    $email = trim($_POST["email"] ?? "");
-    $password = $_POST["password"] ?? "";
-    $confirm = $_POST["confirm_password"] ?? "";
-    $role = trim($_POST["role"] ?? "student");
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $name = isset($_POST["name"]) ? trim($_POST["name"]) : "";
+    $email = isset($_POST["email"]) ? trim($_POST["email"]) : "";
+    $mobile = isset($_POST["mobile"]) ? trim($_POST["mobile"]) : "";
+    $course = isset($_POST["course"]) ? trim($_POST["course"]) : "";
+    $year = isset($_POST["year"]) ? trim($_POST["year"]) : "";
+    $gender = isset($_POST["gender"]) ? trim($_POST["gender"]) : "";
+    $password = isset($_POST["password"]) ? $_POST["password"] : "";
+    $confirm = isset($_POST["confirm"]) ? $_POST["confirm"] : "";
+    $terms = isset($_POST["terms"]) ? $_POST["terms"] : "";
 
-    if (empty($name) || strlen($name) < 3) {
-        $errors[] = "Name must be at least 3 characters.";
+    if ($name == "") {
+        $errors["name"] = "Full name is required.";
+    } elseif (strlen($name) < 2) {
+        $errors["name"] = "Name must be at least 2 characters.";
+    } elseif (!preg_match("/^[a-zA-Z\s]+$/", $name)) {
+        $errors["name"] = "Name can only contain letters and spaces.";
     }
 
-    if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $errors[] = "Please provide a valid email address.";
+    if ($email == "") {
+        $errors["email"] = "Email address is required.";
+    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $errors["email"] = "Please enter a valid email address.";
     }
 
-    if (empty($password) || strlen($password) < 6) {
-        $errors[] = "Password must be at least 6 characters.";
+    if ($mobile == "") {
+        $errors["mobile"] = "Mobile number is required.";
+    } elseif (!preg_match("/^[0-9]{10}$/", $mobile)) {
+        $errors["mobile"] = "Mobile number must be exactly 10 digits.";
     }
 
-    if ($password !== $confirm) {
-        $errors[] = "Password confirmation does not match.";
+    if ($course == "" || $course == "Select Course") {
+        $errors["course"] = "Please select a valid course.";
     }
 
-    if (!in_array($role, ["student", "admin"], true)) {
-        $role = "student";
+    if ($year == "" || $year == "Select Year") {
+        $errors["year"] = "Please select a valid year.";
     }
 
-    if (empty($errors)) {
-        try {
-            $check = $pdo->prepare("SELECT id FROM users WHERE email = ?");
-            $check->execute([$email]);
-            if ($check->fetch()) {
-                $errors[] = "A user with this email address is already registered.";
-            } else {
-                $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-                $stmt = $pdo->prepare("INSERT INTO users (name, email, password, role) VALUES (?, ?, ?, ?)");
-                $stmt->execute([$name, $email, $hashedPassword, $role]);
-                $success = "Registration completed successfully with secure password hashing! You can now log in.";
-                $name = "";
-                $email = "";
+    if ($gender == "") {
+        $errors["gender"] = "Please select gender.";
+    }
+
+    if ($password == "") {
+        $errors["password"] = "Password is required.";
+    } elseif (strlen($password) < 8) {
+        $errors["password"] = "Password must be at least 8 characters.";
+    }
+
+    if ($confirm == "") {
+        $errors["confirm"] = "Confirm password is required.";
+    } elseif ($password !== $confirm) {
+        $errors["confirm"] = "Passwords do not match.";
+    }
+
+    if ($terms == "") {
+        $errors["terms"] = "You must agree to the Terms & Conditions.";
+    }
+
+    if (count($errors) == 0) {
+        if ($pdo === null) {
+            $errorMessage = "Database connection error. Please ensure MySQL is running in XAMPP.";
+        } else {
+            try {
+                $checkStmt = $pdo->prepare("SELECT id FROM users WHERE email = ?");
+                $checkStmt->execute([$email]);
+
+                if ($checkStmt->fetch()) {
+                    $errors["email"] = "This email is already registered. Please login or use a different email.";
+                    $errorMessage = "Duplicate email detected. Registration cannot proceed.";
+                } else {
+                    $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+
+                    $insertUser = $pdo->prepare("INSERT INTO users (name, email, password, role) VALUES (?, ?, ?, 'student')");
+                    $insertUser->execute([$name, $email, $hashedPassword]);
+
+                    $insertStudent = $pdo->prepare("INSERT INTO students (name, email, mobile, course, year, gender) VALUES (?, ?, ?, ?, ?, ?)");
+                    $insertStudent->execute([$name, $email, $mobile, $course, $year, $gender]);
+
+                    $ip = $_SERVER["REMOTE_ADDR"] ?? "127.0.0.1";
+                    $logStmt = $pdo->prepare("INSERT INTO audit_logs (user_email, action, details, ip_address) VALUES (?, 'USER_REGISTRATION', 'New user registered via Practical 9', ?)");
+                    $logStmt->execute([$email, $ip]);
+
+                    $successMessage = "User registration successful! Details inserted securely with password hashing.";
+                    $name = "";
+                    $email = "";
+                    $mobile = "";
+                    $course = "";
+                    $year = "";
+                    $gender = "";
+                    $password = "";
+                    $confirm = "";
+                    $terms = "";
+                }
+            } catch (PDOException $e) {
+                $errorMessage = "Database query error: " . $e->getMessage();
             }
-        } catch (PDOException $e) {
-            $errors[] = "Database error: " . $e->getMessage();
         }
+    } else {
+        $errorMessage = "Please resolve the highlighted validation errors and try again.";
     }
 }
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>StudentHub | Secure Registration (Practical 9)</title>
+    <title>Practical 9 | Secure Registration</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <header>
-    <h1><span class="title-badge">StudentHub Portal</span></h1>
+    <h1>StudentHub Portal</h1>
+    <button id="hamburgerBtn" class="hamburger-btn" aria-label="toggle menu">☰ Menu</button>
     <nav class="ttt">
-<a href="home.html" class="m">Home</a>
-<a href="about.html" class="m1">About</a>
-<a href="register.php" class="m2">Register</a>
-<a href="login.php" class="m9">Login</a>
-<a href="users.php" class="m3">Users List</a>
-<a href="dashboard.html" class="m4">Dashboard</a>
-<a href="events.html" class="m5">Events</a>
-<a href="profile.html" class="m6">Profile</a>
-<a href="contact.html" class="m7">Contact</a>
-<a href="faq.html" class="m8">FAQ</a>
+        <a href="home.html" class="m">Home</a>|
+        <a href="about.html" class="m1">About</a>|
+        <a href="register.php" class="m2">Register</a>|
+        <a href="login.html" class="m9">Login</a>|
+        <a href="dashboard.html" class="m3">Dashboard</a>|
+        <a href="events.html" class="m4">Events</a>|
+        <a href="profile.html" class="m5">Profile</a>|
+        <a href="contact.html" class="m6">Contact</a>|
+        <a href="faq.html" class="m7">FAQ</a>|
+        <a href="feedback.html" class="m8">Feedback</a>|
+        <a href="view_users.php" class="m10">Users</a>
     </nav>
+    <button id="themeButton" class="theme-btn">Light / Dark</button>
 </header>
 
-<div class="page-box">
-    <h2>Secure User Registration</h2>
-    <p style="text-align:center; color:#555; margin-bottom:20px;">Practical 9: Authentication with password_hash() and Prepared Statements</p>
+<main>
+<section>
+    <h2 align="center">Practical 9: Secure User Registration</h2>
+    <p align="center" style="margin-top: 5px;">Database Insert with Duplicate Email Check & Password Hashing</p>
+    <br>
 
-    <?php if (!empty($success)): ?>
+    <?php if ($successMessage != ""): ?>
         <div class="alert-success">
-            <strong>Success:</strong> <?php echo $success; ?>
-            <div style="margin-top:10px;">
-                <a href="login.php" class="btn btn-primary" style="margin-right:10px;">Go to Login</a>
-                <a href="users.php" class="btn btn-warning">View Registered Users</a>
-            </div>
+            <?php echo $successMessage; ?>
         </div>
     <?php endif; ?>
 
-    <?php if (!empty($errors)): ?>
+    <?php if ($errorMessage != ""): ?>
         <div class="alert-danger">
-            <strong>Please correct the following:</strong>
-            <ul style="margin: 10px 0 0 20px;">
-                <?php foreach ($errors as $err): ?>
-                    <li><?php echo htmlspecialchars($err); ?></li>
-                <?php endforeach; ?>
-            </ul>
+            <?php echo $errorMessage; ?>
         </div>
     <?php endif; ?>
 
-    <form method="POST" action="register.php" style="max-width:550px; margin:0 auto;">
-        <div style="margin-bottom:15px;">
-            <label style="display:block; font-weight:bold; margin-bottom:5px;">Full Name:</label>
-            <input type="text" name="name" value="<?php echo htmlspecialchars($name); ?>" style="width:100%; padding:9px; border:1px solid #ccc; border-radius:4px;" required>
-        </div>
+    <form action="register.php" method="POST">
+        <label for="name">Full Name</label>
+        <input type="text" id="name" name="name" value="<?php echo htmlspecialchars($name, ENT_QUOTES, 'UTF-8'); ?>" placeholder="Enter your full name">
+        <?php if (isset($errors["name"])): ?>
+            <span class="error"><?php echo $errors["name"]; ?></span>
+        <?php endif; ?>
 
-        <div style="margin-bottom:15px;">
-            <label style="display:block; font-weight:bold; margin-bottom:5px;">Email Address:</label>
-            <input type="email" name="email" value="<?php echo htmlspecialchars($email); ?>" style="width:100%; padding:9px; border:1px solid #ccc; border-radius:4px;" required>
-        </div>
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="email" value="<?php echo htmlspecialchars($email, ENT_QUOTES, 'UTF-8'); ?>" placeholder="Enter your email">
+        <?php if (isset($errors["email"])): ?>
+            <span class="error"><?php echo $errors["email"]; ?></span>
+        <?php endif; ?>
 
-        <div style="margin-bottom:15px;">
-            <label style="display:block; font-weight:bold; margin-bottom:5px;">Password (Min 6 Characters):</label>
-            <input type="password" name="password" style="width:100%; padding:9px; border:1px solid #ccc; border-radius:4px;" required>
-        </div>
+        <label for="mobile">Mobile Number</label>
+        <input type="tel" id="mobile" name="mobile" value="<?php echo htmlspecialchars($mobile, ENT_QUOTES, 'UTF-8'); ?>" placeholder="Enter 10-digit mobile number">
+        <?php if (isset($errors["mobile"])): ?>
+            <span class="error"><?php echo $errors["mobile"]; ?></span>
+        <?php endif; ?>
 
-        <div style="margin-bottom:15px;">
-            <label style="display:block; font-weight:bold; margin-bottom:5px;">Confirm Password:</label>
-            <input type="password" name="confirm_password" style="width:100%; padding:9px; border:1px solid #ccc; border-radius:4px;" required>
-        </div>
+        <label for="course">Course</label>
+        <select id="course" name="course">
+            <option value="">Select Course</option>
+            <option value="B.Tech Computer Engineering" <?php if ($course == "B.Tech Computer Engineering") echo "selected"; ?>>B.Tech Computer Engineering</option>
+            <option value="B.Tech Information Technology" <?php if ($course == "B.Tech Information Technology") echo "selected"; ?>>B.Tech Information Technology</option>
+            <option value="B.Tech Civil Engineering" <?php if ($course == "B.Tech Civil Engineering") echo "selected"; ?>>B.Tech Civil Engineering</option>
+            <option value="B.Tech Mechanical Engineering" <?php if ($course == "B.Tech Mechanical Engineering") echo "selected"; ?>>B.Tech Mechanical Engineering</option>
+        </select>
+        <?php if (isset($errors["course"])): ?>
+            <span class="error"><?php echo $errors["course"]; ?></span>
+        <?php endif; ?>
 
-        <div style="margin-bottom:20px;">
-            <label style="display:block; font-weight:bold; margin-bottom:5px;">Select Role:</label>
-            <select name="role" style="width:100%; padding:9px; border:1px solid #ccc; border-radius:4px;">
-                <option value="student" <?php if ($role === "student") echo "selected"; ?>>Student</option>
-                <option value="admin" <?php if ($role === "admin") echo "selected"; ?>>Admin</option>
-            </select>
-        </div>
+        <label for="year">Year</label>
+        <select id="year" name="year">
+            <option value="">Select Year</option>
+            <option value="First Year" <?php if ($year == "First Year") echo "selected"; ?>>First Year</option>
+            <option value="Second Year" <?php if ($year == "Second Year") echo "selected"; ?>>Second Year</option>
+            <option value="Third Year" <?php if ($year == "Third Year") echo "selected"; ?>>Third Year</option>
+            <option value="Fourth Year" <?php if ($year == "Fourth Year") echo "selected"; ?>>Fourth Year</option>
+        </select>
+        <?php if (isset($errors["year"])): ?>
+            <span class="error"><?php echo $errors["year"]; ?></span>
+        <?php endif; ?>
 
-        <div style="text-align:center;">
-            <button type="submit" class="btn btn-primary" style="padding:10px 24px; font-size:16px;">Create Account</button>
-            <a href="login.php" class="btn btn-warning" style="padding:10px 24px; font-size:16px; margin-left:10px;">Already have an account? Login</a>
-        </div>
+        <label>Gender</label>
+        <input type="radio" name="gender" value="Male" <?php if ($gender == "Male") echo "checked"; ?>> Male
+        <input type="radio" name="gender" value="Female" <?php if ($gender == "Female") echo "checked"; ?>> Female
+        <input type="radio" name="gender" value="Other" <?php if ($gender == "Other") echo "checked"; ?>> Other
+        <?php if (isset($errors["gender"])): ?>
+            <span class="error"><?php echo $errors["gender"]; ?></span>
+        <?php endif; ?>
+
+        <br><br>
+
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" placeholder="Create Password (min 8 chars)">
+        <?php if (isset($errors["password"])): ?>
+            <span class="error"><?php echo $errors["password"]; ?></span>
+        <?php endif; ?>
+
+        <label for="confirm">Confirm Password</label>
+        <input type="password" id="confirm" name="confirm" placeholder="Confirm Password">
+        <?php if (isset($errors["confirm"])): ?>
+            <span class="error"><?php echo $errors["confirm"]; ?></span>
+        <?php endif; ?>
+
+        <br>
+        <input type="checkbox" id="terms" name="terms" value="yes" <?php if ($terms == "yes") echo "checked"; ?>>
+        <label for="terms" style="display:inline; font-weight:normal;">I agree to the Terms & Conditions</label>
+        <?php if (isset($errors["terms"])): ?>
+            <span class="error"><?php echo $errors["terms"]; ?></span>
+        <?php endif; ?>
+
+        <br><br>
+        <button type="submit">Create Account</button>
     </form>
-</div>
+
+    <div class="action-links">
+        <a href="view_users.php" class="vvv">View Registered Users</a>
+    </div>
+</section>
+</main>
 
 <footer>
-    <p>2026 StudentHub Portal. All rights reserved.</p>
+    <p>© 2026 StudentHub Portal | Web Development Frameworks</p>
 </footer>
 
+<script src="script.js"></script>
 </body>
 </html>

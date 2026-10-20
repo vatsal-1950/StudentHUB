@@ -1,55 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>StudentHub | Events</title>
-<link rel="stylesheet" href="style.css">
+    <title>StudentHub | Events</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
 <header>
-<h1><span class="title-badge">StudentHub Portal</span></h1>
-
-<nav class="ttt">
-<a href="home.html" class="m">Home</a>
-<a href="about.html" class="m1">About</a>
-<a href="register.php" class="m2">Register</a>
-<a href="login.php" class="m9">Login</a>
-<a href="users.php" class="m3">Users List</a>
-<a href="dashboard.html" class="m4">Dashboard</a>
-<a href="events.html" class="m5">Events</a>
-<a href="profile.html" class="m6">Profile</a>
-<a href="contact.html" class="m7">Contact</a>
-<a href="faq.html" class="m8">FAQ</a>
-</nav>
+    <h1>StudentHub Portal</h1>
+    <button id="hamburgerBtn" class="hamburger-btn" aria-label="toggle menu">☰ Menu</button>
+    <nav class="ttt">
+        <a href="home.html" class="m">Home</a>|
+        <a href="about.html" class="m1">About</a>|
+        <a href="register.php" class="m2">Register</a>|
+        <a href="login.html" class="m9">Login</a>|
+        <a href="dashboard.html" class="m3">Dashboard</a>|
+        <a href="events.html" class="m4">Events</a>|
+        <a href="profile.html" class="m5">Profile</a>|
+        <a href="contact.html" class="m6">Contact</a>|
+        <a href="faq.html" class="m7">FAQ</a>|
+        <a href="feedback.html" class="m8">Feedback</a>|
+        <a href="view_users.php" class="m10">Users</a>
+    </nav>
+    <button id="themeButton" class="theme-btn">Light / Dark</button>
 </header>
 
 <main>
+<section>
+    <h2 align="center">Upcoming Events</h2>
 
-<div class="page-box">
+    <div class="json-controls">
+        <input type="text" id="searchInput" placeholder="Search events...">
+        <select id="categoryFilter">
+            <option value="all">All Categories</option>
+            <option value="Workshop">Workshop</option>
+            <option value="Competition">Competition</option>
+            <option value="Sports">Sports</option>
+            <option value="Seminar">Seminar</option>
+        </select>
+        <select id="sortSelect">
+            <option value="dateAsc">Date: Oldest First</option>
+            <option value="dateDesc">Date: Newest First</option>
+            <option value="titleAsc">Title: A-Z</option>
+            <option value="titleDesc">Title: Z-A</option>
+        </select>
+    </div>
 
-<h2><span class="title-badge">Upcoming Events</span></h2>
-<p class="data-intro">Browse campus activities. Search by name, venue, or description, then filter and sort the results.</p>
-<div class="data-controls" data-controls>
-  <label>Search events<input type="search" data-search placeholder="Try “workshop” or “auditorium”"></label>
-  <label>Category<select data-filter><option value="">All categories</option></select></label>
-  <label>Sort by<select data-sort><option value="date-asc">Date (earliest first)</option><option value="date-desc">Date (latest first)</option><option value="title-asc">Title (A–Z)</option><option value="title-desc">Title (Z–A)</option></select></label>
-</div>
-<p class="data-status" data-status role="status" aria-live="polite">Loading events…</p>
-<div class="data-grid" data-results></div>
-<nav class="pagination" data-pagination aria-label="Events pages"></nav>
-
-</div>
-
+    <p id="loadingMessage">Loading events...</p>
+    <p id="errorMessage" class="json-error"></p>
+    <div id="eventContainer" class="event-list"></div>
+    <div id="pagination" class="pagination"></div>
+</section>
 </main>
 
 <footer>
-<p>© 2026 StudentHub Portal</p>
+    <p>© 2026 StudentHub Portal</p>
 </footer>
 
 <script src="script.js"></script>
-<script type="module" src="data-browser.js"></script>
 </body>
 </html>

@@ -1,63 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
-<title>StudentHub | Contact</title>
-<link rel="stylesheet" href="style.css">
-<script src="script.js"></script>
+    <title>StudentHub | Contact</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
 <header>
-<h1><span class="title-badge">StudentHub Portal</span></h1>
-
-<nav class="ttt">
-<a href="home.html" class="m">Home</a>
-<a href="about.html" class="m1">About</a>
-<a href="register.php" class="m2">Register</a>
-<a href="login.php" class="m9">Login</a>
-<a href="users.php" class="m3">Users List</a>
-<a href="dashboard.html" class="m4">Dashboard</a>
-<a href="events.html" class="m5">Events</a>
-<a href="profile.html" class="m6">Profile</a>
-<a href="contact.html" class="m7">Contact</a>
-<a href="faq.html" class="m8">FAQ</a>
-</nav>
+    <h1>StudentHub Portal</h1>
+    <button id="hamburgerBtn" class="hamburger-btn" aria-label="toggle menu">☰ Menu</button>
+    <nav class="ttt">
+        <a href="home.html" class="m">Home</a>|
+        <a href="about.html" class="m1">About</a>|
+        <a href="register.php" class="m2">Register</a>|
+        <a href="login.html" class="m9">Login</a>|
+        <a href="dashboard.html" class="m3">Dashboard</a>|
+        <a href="events.html" class="m4">Events</a>|
+        <a href="profile.html" class="m5">Profile</a>|
+        <a href="contact.html" class="m6">Contact</a>|
+        <a href="faq.html" class="m7">FAQ</a>|
+        <a href="feedback.html" class="m8">Feedback</a>|
+        <a href="view_users.php" class="m10">Users</a>
+    </nav>
+    <button id="themeButton" class="theme-btn">Light / Dark</button>
 </header>
 
 <main>
+<section>
+    <h2 align="center">Contact Us</h2>
+    <br>
 
-<div class="page-box">
+    <form action="contact.html" method="POST">
+        <label for="contact_name">Name</label>
+        <input type="text" id="contact_name" name="name" placeholder="Enter Name" required>
 
-<h2 align="center"><span class="title-badge">Contact Us</span></h2>
+        <label for="contact_email">Email</label>
+        <input type="email" id="contact_email" name="email" placeholder="Enter Email" required>
 
-<br>
+        <label for="contact_message">Message</label>
+        <textarea id="contact_message" name="message" rows="5" placeholder="Enter Message" required></textarea>
 
-<form>
+        <button type="submit">Send Message</button>
+    </form>
 
-<label>Name</label>
-<input type="text" placeholder="Enter Name">
-
-<label>Email</label>
-<input type="email" placeholder="Enter Email">
-
-<label>Message</label>
-
-<textarea rows="5" placeholder="Enter Message"></textarea>
-
-<button>Send Message</button>
-
-</form>
-
-</div>
-
+    <div class="action-links">
+        <a href="view_users.php" class="vvv">View All Stored Records</a>
+    </div>
+</section>
 </main>
 
 <footer>
-
-<p>© 2026 StudentHub Portal</p>
-
+    <p>© 2026 StudentHub Portal</p>
 </footer>
 
 <script src="script.js"></script>

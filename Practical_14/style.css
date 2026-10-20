@@ -1,0 +1,446 @@
+*{
+    color: rgb(0, 0, 0);
+    margin: 0%;
+}
+
+body{
+    background-color:white;
+}
+
+h1{
+    background-color: blue;
+    color: rgb(234, 240, 246);
+}
+
+header{
+    background-color:blue;
+    color:white;
+    text-align: center;
+}
+
+nav{
+    color: aliceblue;
+    margin-top: 20px;
+}
+
+.hero{
+    background-color: aliceblue;
+    text-align: center;
+}
+
+.hero p{
+    margin: 10px;
+}
+
+.vvv{
+    color: blue;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.vvv:hover{
+    background-color: darkblue;
+    color: aliceblue;
+}
+
+section{
+    padding: 10px;
+}
+
+.card-container{
+    text-align: center;
+}
+
+.card{
+    display: inline-block;
+    width: 300px;
+    background-color: aliceblue;
+    margin: 10px;
+    padding: 15px;
+    border: 1px solid lightgray;
+    text-align: left;
+}
+
+.card h3{
+    color: blue;
+    margin-bottom: 10px;
+}
+
+footer{
+    text-align: center;
+    background-color: blue;
+    color: aliceblue;
+    padding: 10px;
+    margin-top: 20px;
+}
+
+.m:hover,
+.m1:hover,
+.m2:hover,
+.m3:hover,
+.m4:hover,
+.m5:hover,
+.m6:hover,
+.m7:hover,
+.m8:hover,
+.m9:hover,
+.m10:hover{
+    background-color: blue;
+    color: aliceblue;
+}
+
+.ttt{
+    background-color: aliceblue;
+    color: red;
+}
+
+.hamburger-btn{
+    display: none;
+    background-color: white;
+    color: blue;
+    border: 1px solid blue;
+    padding: 8px 12px;
+    margin: 10px auto;
+    cursor: pointer;
+}
+
+.theme-btn{
+    background-color: white;
+    color: blue;
+    border: 1px solid blue;
+    padding: 7px 12px;
+    margin: 10px;
+    cursor: pointer;
+}
+
+.notification-banner{
+    background-color: blue;
+    color: white;
+    text-align: center;
+    padding: 10px 40px 10px 15px;
+    position: relative;
+}
+
+.notification-banner span{
+    color: white;
+}
+
+.close-banner-bnt{
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    position: absolute;
+    right: 15px;
+    top: 5px;
+}
+
+.faq-question{
+    background-color: aliceblue;
+    color: blue;
+    padding: 12px;
+    margin-top: 10px;
+    cursor: pointer;
+    border: 1px solid lightgray;
+}
+
+.faq-answer{
+    display: none;
+    padding: 12px;
+    background-color: white;
+}
+
+.show-answer{
+    display: block;
+}
+
+.slider{
+    width: 80%;
+    max-width: 700px;
+    margin: 20px auto;
+    text-align: center;
+}
+
+.slide{
+    display: none;
+    background-color: aliceblue;
+    padding: 30px;
+    border: 1px solid lightgray;
+}
+
+.slider button{
+    margin: 10px;
+    padding: 8px 15px;
+    cursor: pointer;
+}
+
+.modal{
+    display: none;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content{
+    background-color: white;
+    width: 60%;
+    margin: 15% auto;
+    padding: 20px;
+    text-align: center;
+}
+
+.modal-content button{
+    padding: 8px 15px;
+    margin-top: 15px;
+}
+
+.dark-mode{
+    background-color: #222;
+    color: white;
+}
+
+.dark-mode section,
+.dark-mode main,
+.dark-mode .faq-answer,
+.dark-mode .modal-content,
+.dark-mode .record-table{
+    background-color: #222;
+    color: white;
+}
+
+.dark-mode .card,
+.dark-mode .slide,
+.dark-mode .faq-question,
+.dark-mode form{
+    background-color: #333;
+    color: white;
+}
+
+.dark-mode .card h3,
+.dark-mode .faq-question{
+    color: lightblue;
+}
+
+.dark-mode label,
+.dark-mode p,
+.dark-mode h2,
+.dark-mode span,
+.dark-mode td{
+    color: white;
+}
+
+@media (max-width: 700px){
+    .hamburger-btn{
+        display: block;
+    }
+
+    .ttt{
+        display: none;
+        padding: 10px;
+    }
+
+    .ttt.show-menu{
+        display: block;
+    }
+
+    .ttt a{
+        display: block;
+        margin: 8px;
+    }
+
+    .card{
+        width: 80%;
+    }
+}
+
+.error{
+    display: block;
+    color: red;
+    margin: 4px 0 8px 0;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.strength-message{
+    margin: 5px 0 10px 0;
+    font-size: 13px;
+    color: blue;
+}
+
+.form-message{
+    margin-top: 12px;
+    font-weight: bold;
+}
+
+.form-message.success{
+    color: green;
+}
+
+.form-message.error-message{
+    color: red;
+}
+
+.json-controls{
+    text-align: center;
+    margin: 20px auto;
+}
+
+.json-controls input,
+.json-controls select{
+    padding: 8px;
+    margin: 5px;
+}
+
+.event-list{
+    text-align: center;
+}
+
+.event-card{
+    vertical-align: top;
+}
+
+.json-error{
+    color: red;
+    text-align: center;
+}
+
+.pagination{
+    text-align: center;
+    margin: 20px;
+}
+
+.pagination button{
+    margin: 4px;
+    padding: 7px 12px;
+    cursor: pointer;
+}
+
+form{
+    max-width: 550px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: aliceblue;
+    border: 1px solid #ccc;
+}
+
+form label{
+    display: block;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+form input[type="text"],
+form input[type="email"],
+form input[type="tel"],
+form input[type="password"],
+form select,
+form textarea{
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    box-sizing: border-box;
+    border: 1px solid #aaa;
+}
+
+form button{
+    margin-top: 15px;
+    padding: 10px 20px;
+    background-color: blue;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+form button:hover{
+    background-color: darkblue;
+}
+
+.alert-success{
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+    padding: 12px;
+    margin: 15px auto;
+    max-width: 550px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.alert-danger{
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+    padding: 12px;
+    margin: 15px auto;
+    max-width: 550px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.table-container{
+    max-width: 900px;
+    margin: 20px auto;
+    overflow-x: auto;
+}
+
+.record-table{
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    background-color: white;
+}
+
+.record-table th,
+.record-table td{
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+}
+
+.record-table th{
+    background-color: blue;
+    color: white;
+}
+
+.record-table tr:nth-child(even){
+    background-color: #f2f6fc;
+}
+
+.action-links{
+    text-align: center;
+    margin: 20px auto;
+}
+
+.action-links a{
+    margin: 0 10px;
+    color: blue;
+    font-weight: bold;
+}
+
+.dashboard{
+    display: flex;
+}
+
+.dashboard aside{
+    width: 200px;
+    background-color: aliceblue;
+    padding: 15px;
+}
+
+.dashboard aside ul{
+    list-style-type: none;
+    padding: 0;
+}
+
+.dashboard aside li{
+    padding: 8px 0;
+}
+
+.dashboard main{
+    flex-grow: 1;
+    padding: 15px;
+}

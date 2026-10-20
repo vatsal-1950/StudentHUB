@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>StudentHub | Register</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+    <h1>StudentHub Portal</h1>
+    <button id="hamburgerBtn" class="hamburger-btn" aria-label="toggle menu">☰ Menu</button>
+    <nav class="ttt">
+        <a href="home.html" class="m">Home</a>|
+        <a href="about.html" class="m1">About</a>|
+        <a href="register.php" class="m2">Register</a>|
+        <a href="login.html" class="m9">Login</a>|
+        <a href="dashboard.html" class="m3">Dashboard</a>|
+        <a href="events.html" class="m4">Events</a>|
+        <a href="profile.html" class="m5">Profile</a>|
+        <a href="contact.php" class="m6">Contact</a>|
+        <a href="faq.html" class="m7">FAQ</a>|
+        <a href="feedback.html" class="m8">Feedback</a>|
+        <a href="view_records.php" class="m10">Records</a>
+    </nav>
+    <button id="themeButton" class="theme-btn">Light / Dark</button>
+</header>
+
+<main>
+<section>
+    <h2 align="center">Student Registration</h2>
+    <br>
+
+    <form action="register.php" method="POST">
+        <label for="name">Full Name</label>
+        <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="email" placeholder="Enter your email" required>
+
+        <label for="mobile">Mobile Number</label>
+        <input type="tel" id="mobile" name="mobile" placeholder="Enter 10-digit mobile number" required>
+
+        <label for="course">Course</label>
+        <select id="course" name="course" required>
+            <option value="">Select Course</option>
+            <option value="B.Tech Computer Engineering">B.Tech Computer Engineering</option>
+            <option value="B.Tech Information Technology">B.Tech Information Technology</option>
+            <option value="B.Tech Civil Engineering">B.Tech Civil Engineering</option>
+            <option value="B.Tech Mechanical Engineering">B.Tech Mechanical Engineering</option>
+        </select>
+
+        <label for="year">Year</label>
+        <select id="year" name="year" required>
+            <option value="">Select Year</option>
+            <option value="First Year">First Year</option>
+            <option value="Second Year">Second Year</option>
+            <option value="Third Year">Third Year</option>
+            <option value="Fourth Year">Fourth Year</option>
+        </select>
+
+        <label>Gender</label>
+        <input type="radio" name="gender" value="Male" required> Male
+        <input type="radio" name="gender" value="Female"> Female
+        <input type="radio" name="gender" value="Other"> Other
+
+        <br><br>
+
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" placeholder="Create Password" required>
+
+        <label for="confirm">Confirm Password</label>
+        <input type="password" id="confirm" name="confirm" placeholder="Confirm Password" required>
+
+        <br>
+        <input type="checkbox" id="terms" name="terms" value="yes" required>
+        <label for="terms" style="display:inline; font-weight:normal;">I agree to the Terms & Conditions</label>
+
+        <br><br>
+        <button type="submit">Register</button>
+    </form>
+
+    <div class="action-links">
+        <a href="view_records.php" class="vvv">View All Stored Records</a>
+    </div>
+</section>
+</main>
+
+<footer>
+    <p>© 2026 StudentHub Portal | Web Development Frameworks</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

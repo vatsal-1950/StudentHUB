@@ -1,0 +1,11 @@
+[
+    {
+        "name": "Rajesh Sharma",
+        "email": "rajesh.sharma@example.com",
+        "mobile": "9876543210",
+        "course": "B.Tech Information Technology",
+        "year": "Third Year",
+        "gender": "Male",
+        "registered_at": "2026-10-20 18:43:03"
+    }
+]

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>StudentHub | Login</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+    <h1>StudentHub Portal</h1>
+    <button id="hamburgerBtn" class="hamburger-btn" aria-label="toggle menu">☰ Menu</button>
+    <nav class="ttt">
+        <a href="home.html" class="m">Home</a>|
+        <a href="about.html" class="m1">About</a>|
+        <a href="register.php" class="m2">Register</a>|
+        <a href="login.html" class="m9">Login</a>|
+        <a href="dashboard.html" class="m3">Dashboard</a>|
+        <a href="events.html" class="m4">Events</a>|
+        <a href="profile.html" class="m5">Profile</a>|
+        <a href="contact.php" class="m6">Contact</a>|
+        <a href="faq.html" class="m7">FAQ</a>|
+        <a href="feedback.html" class="m8">Feedback</a>|
+        <a href="view_records.php" class="m10">Records</a>
+    </nav>
+    <button id="themeButton" class="theme-btn">Light / Dark</button>
+</header>
+
+<main>
+<section>
+    <h2 align="center">Student Login</h2>
+    <br>
+
+    <form action="dashboard.html" method="GET">
+        <label for="login_email">Email Address</label>
+        <input type="email" id="login_email" placeholder="Enter Email" required>
+
+        <label for="login_password">Password</label>
+        <input type="password" id="login_password" placeholder="Enter Password" required>
+
+        <br>
+        <input type="checkbox" id="remember">
+        <label for="remember" style="display:inline; font-weight:normal;">Remember Me</label>
+
+        <br><br>
+        <button type="submit">Login</button>
+
+        <br><br>
+        <p align="center">
+            Don't have an account?
+            <a href="register.php" class="vvv">Register Here</a>
+        </p>
+    </form>
+</section>
+</main>
+
+<footer>
+    <p>© 2026 StudentHub Portal | All Rights Reserved</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
